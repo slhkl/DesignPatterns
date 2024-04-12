@@ -1,6 +1,4 @@
-﻿using static System.Console;
-
-Compound unknown = new Compound();
+﻿Compound unknown = new Compound();
 unknown.Display();
 
 var water = new RichCompound(Chemical.Water);
@@ -17,9 +15,10 @@ public class Compound
     public float MeltingPoint { get; protected set; }
     public double MolecularWeight { get; protected set; }
     public string? MolecularFormula { get; protected set; }
+
     public virtual void Display()
     {
-        WriteLine("\nCompound: Unknown ------ ");
+        Console.WriteLine("\nCompound: Unknown ------ ");
     }
 }
 
@@ -31,17 +30,18 @@ public class RichCompound : Compound
     {
         Chemical = chemical;
     }
+
     public override void Display()
     {
         BoilingPoint = bank.GetCriticalPoint(Chemical, State.Boiling);
         MeltingPoint = bank.GetCriticalPoint(Chemical, State.Melting);
         MolecularWeight = bank.GetMolecularWeight(Chemical);
         MolecularFormula = bank.GetMolecularStructure(Chemical);
-        WriteLine($"\nCompound: {Chemical} ------ ");
-        WriteLine($" Formula: {MolecularFormula}");
-        WriteLine($" Weight : {MolecularWeight}");
-        WriteLine($" Melting Pt: {MeltingPoint}");
-        WriteLine($" Boiling Pt: {BoilingPoint}");
+        Console.WriteLine($"\nCompound: {Chemical} ------ ");
+        Console.WriteLine($" Formula: {MolecularFormula}");
+        Console.WriteLine($" Weight : {MolecularWeight}");
+        Console.WriteLine($" Melting Pt: {MeltingPoint}");
+        Console.WriteLine($" Boiling Pt: {BoilingPoint}");
     }
 }
 public class ChemicalDatabank
@@ -72,6 +72,7 @@ public class ChemicalDatabank
             };
         }
     }
+
     public string GetMolecularStructure(Chemical compound)
     {
         return compound switch
@@ -82,6 +83,7 @@ public class ChemicalDatabank
             _ => "",
         };
     }
+
     public double GetMolecularWeight(Chemical compound)
     {
         return compound switch
@@ -93,6 +95,7 @@ public class ChemicalDatabank
         };
     }
 }
+
 /// <summary>
 /// Chemical enumeration
 /// </summary>
@@ -102,6 +105,7 @@ public enum Chemical
     Benzene,
     Ethanol
 }
+
 /// <summary>
 /// State enumeration
 /// </summary>

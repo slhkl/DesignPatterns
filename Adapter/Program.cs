@@ -1,20 +1,6 @@
-﻿Target target = new Adapter(new Adaptee());
+﻿Target target = new Adapter();
 target.Request();
 
-public class Adapter : Target
-{
-    private readonly Adaptee _adaptee;
-
-    public Adapter(Adaptee adaptee)
-    {
-        _adaptee = adaptee;
-    }
-
-    public override void Request()
-    {
-        _adaptee.SpecificRequest();
-    }
-}
 public class Adaptee
 {
     public void SpecificRequest()
@@ -26,4 +12,14 @@ public class Adaptee
 public abstract class Target
 {
     public abstract void Request();
+}
+
+public class Adapter : Target
+{
+    private Adaptee adaptee = new Adaptee();
+
+    public override void Request()
+    {
+        adaptee.SpecificRequest();
+    }
 }
